@@ -20,7 +20,7 @@ def extrai_dados(cb):
     # Extraindo o nome do carro
     str_name = cb.find('span', class_='car_name').text
 
-    # Extraindo o número de cilindros e convertendo para inteiro
+    # Extraindo o número de cilindros e convertendo para int
     str_cylinders = cb.find('span', class_='cylinders').text
     cylinders = int(str_cylinders)
 
@@ -49,10 +49,10 @@ def extrai_dados(cb):
 
 def processa_blocos_carros(soup):
     
-    # Extraindo informações de repetidas divisões (tag div)
+    # Extraindo informações de repetidas divisões
     car_blocks = soup.find_all('div', class_='car_block')
 
-    # Lista vazia para receber as linhas
+    # Criando a lista vazia para receber as linhas
     linhas = []
 
     # Loop pelos blocos de dados de carros
@@ -70,7 +70,7 @@ def processa_blocos_carros(soup):
     print(linhas[-1])
     print("\n")
 
-    # Grava o resultado em csv
+    # Gravando o resultado em csv
     with open("dados_copiados_v1.csv", "w") as f:
         writer = csv.DictWriter(f, fieldnames = linha.keys())
         writer.writeheader()
@@ -89,7 +89,7 @@ if __name__ == "__main__":
             print(f"\nCarregando o cache a partir do arquivo {filename}")
             result = pickle.load(f)
    
-    # Se não, copiamos da página web
+    # Se não, copie a página web
     else:
         print(f"\nCopiando dados da página {PAGE}.")
         result = requests.get(PAGE)
